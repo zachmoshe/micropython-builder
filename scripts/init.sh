@@ -22,17 +22,10 @@ git clone https://github.com/v923z/micropython-ulab ulab || git -C ulab pull
 
 # only check out micropython, if it is not available locally, otherwise, pull
 git clone https://github.com/micropython/micropython micropython || git -C micropython pull
-#: ${MICROPYTHON_TAG:=$(git tag --sort -v:refname | grep -v preview | head -n 1)}
-# git -C micropython checkout ${MICROPYTHON_TAG}
-echo "TAGS:"
-(cd micropython && git tag --sort -v:refnamet -C micropython tag --sort -v:refname)
-echo "-------"
-MICROPYTHON_TAG=${MICROPYTHON_TAG:-$(cd micropython && git tag --sort -v:refname | grep -v preview | head -n 1)}
-echo MICROPYTHON_TAG \"${MICROPYTHON_TAG}\"
-
-git -C micropython checkout v1.24.0
-
 cd micropython
+: ${MICROPYTHON_TAG:=$(git tag --sort -v:refname | grep -v preview | head -n 1)}
+git checkout ${MICROPYTHON_TAG}
+
 git submodule update --init
 cd ..
 
