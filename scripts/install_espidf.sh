@@ -5,7 +5,8 @@ sudo apt-get install git wget flex bison gperf python3 python3-venv cmake ninja-
 
 pip3 install pyelftools
 git clone https://github.com/espressif/esp-idf.git
-git -C esp-idf checkout v5.0.4
+: ${ESPIDF_TAG:=$(git -C esp-idf tag --sort -v:refname | grep -v preview | head -n 1)}
+git -C esp-idf checkout ${ESPIDF_TAG}
 ./esp-idf/install.sh
 
 cd esp-idf
