@@ -25,9 +25,9 @@ git clone https://github.com/micropython/micropython micropython || git -C micro
 #: ${MICROPYTHON_TAG:=$(git tag --sort -v:refname | grep -v preview | head -n 1)}
 # git -C micropython checkout ${MICROPYTHON_TAG}
 echo "TAGS:"
-git tag --sort -v:refnamet -C micropython tag --sort -v:refname
+(cd micropython && git tag --sort -v:refnamet -C micropython tag --sort -v:refname)
 echo "-------"
-MICROPYTHON_TAG=${MICROPYTHON_TAG:-$(git tag --sort -v:refname | grep -v preview | head -n 1)}
+MICROPYTHON_TAG=${MICROPYTHON_TAG:-$(cd micropython && git tag --sort -v:refname | grep -v preview | head -n 1)}
 echo MICROPYTHON_TAG \"${MICROPYTHON_TAG}\"
 
 git -C micropython checkout v1.24.0
